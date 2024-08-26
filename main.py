@@ -18,7 +18,8 @@ def wordCount():
     words = bookstring.split()
     for i in words:
         count += 1
-    print(count)
+    #print(count)
+    return count
 
 def characterCount():
     charDict = {}
@@ -30,18 +31,35 @@ def characterCount():
             charDict[i] += 1
         else:
             charDict[i] = 1
-    print(charDict)
+    #print(charDict)
+    return charDict
 
-
+def sort_on():
+    charDictList = characterCount()
+    letters = []
+    for char, count in charDictList.items():
+        if char.isalpha():
+            letters.append({"char": char, "count": count})
+        letters.sort(reverse=True, key=lambda element: element['count'])
+    return letters
 
 
 def printReport():
-    print("--- Begin report of books/frankenstein.txt")
-    print(f"{wordCount} words found in the document")
+    count = wordCount()
+    charcter = sort_on()
+    print("--- Begin report of books/frankenstein.txt ---")
+    print(f"{count} words found in the document\n")
+
     
+    for i in charcter:
+        char = i['char']
+        number = i['count']
+        print(f"The '{char}' character was found '{number}' times")
+    print(" --- End report ---")
 
 
-main()
-wordCount()
-characterCount()
+#main()
+#wordCount()
+#characterCount()
+#sort_on()
 printReport()
